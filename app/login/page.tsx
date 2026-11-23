@@ -59,29 +59,29 @@ export default function LoginPage() {
 
       <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-16 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-20 lg:px-8">
         {/* Brand statement (desktop) */}
-        <section aria-label="About the operations console" className="hidden lg:block">
+        <section aria-label="About Gymbox" className="hidden lg:block">
           <div className="hero-reveal flex items-center gap-4">
             <span aria-hidden="true" className="h-px w-12 bg-brand-red" />
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-text-muted">
-              Operations Console
+              Member &amp; Staff Login
             </p>
           </div>
 
           <div className="hero-reveal mt-6 [animation-delay:120ms]">
             <h2 className="text-6xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-text-primary xl:text-7xl">
               <span className="block">
-                One Console<span className="text-brand-red">.</span>
+                Welcome Back<span className="text-brand-red">.</span>
               </span>
               <span className="block text-text-secondary">
-                Every Site<span className="text-brand-red">.</span>
+                Keep Training<span className="text-brand-red">.</span>
               </span>
             </h2>
           </div>
 
           <div className="hero-reveal mt-7 max-w-md [animation-delay:240ms]">
             <p className="text-base leading-relaxed text-text-secondary">
-              Secure access for the Gymbox team. Manage everything from a
-              single place.
+              Sign in to manage your membership, or access the staff
+              dashboard if you work at Gymbox.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function LoginPage() {
               <div className="flex items-center gap-3">
                 <span aria-hidden="true" className="h-px w-8 bg-brand-red" />
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-red">
-                  Secure Access
+                  Account Login
                 </p>
               </div>
               <h1 className="text-3xl font-black tracking-tight text-text-primary">
@@ -130,7 +130,7 @@ export default function LoginPage() {
               <rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
               <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.3" />
             </svg>
-            Authorized personnel only
+            Secure sign-in
           </div>
         </div>
       </div>
