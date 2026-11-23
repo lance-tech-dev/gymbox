@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Login",
 };
 
-const MODULES = ["Tab 1", "Tab 2", "Tab 3"];
+const MODULES = ["Activities", "Promo", "Location"];
 
 async function AuthRedirectCheck() {
   await connection();

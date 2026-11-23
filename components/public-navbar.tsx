@@ -5,22 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BrandLogo } from "@/components/brand-logo";
-import { createClient } from "@/lib/supabase/client";
+import { useSignedIn } from "@/lib/use-signed-in";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
-  { label: "Tab 2", href: "/tab-2" },
-  { label: "Tab 3", href: "/tab-3" },
-  { label: "Tab 4", href: "/tab-4" },
-  { label: "Tab 5", href: "/tab-5" },
+  { label: "About", href: "/about" },
+  { label: "Activities", href: "/activities" },
+  { label: "Promo", href: "/promo" },
+  { label: "Location", href: "/location" },
 ] as const;
 
 // Homepage sections that mirror a nav tab, in page order.
 const HOME_SECTIONS = [
-  { id: "tab-2", href: "/tab-2" },
-  { id: "tab-3", href: "/tab-3" },
-  { id: "tab-4", href: "/tab-4" },
-  { id: "tab-5", href: "/tab-5" },
+  { id: "about", href: "/about" },
+  { id: "activities", href: "/activities" },
+  { id: "promo", href: "/promo" },
+  { id: "location", href: "/location" },
 ] as const;
 
 function isActivePath(pathname: string, href: string) {
@@ -46,23 +46,19 @@ export default function PublicNavbar() {
   const menuId = useId();
   const isHome = pathname === "/";
   const [homeSectionHref, setHomeSectionHref] = useState<string>("/");
-  const [signedIn, setSignedIn] = useState(false);
-
-  // Show "My Account" instead of "Login" for signed-in visitors. Display only:
-  // access to protected pages is always verified on the server.
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
-    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSignedIn(!!session);
-    });
-    return () => data.subscription.unsubscribe();
-  }, []);
+  const signedIn = useSignedIn();
 
   const authLink = signedIn
-    ? { href: "/account", label: "My Account" }
+    ? { href: "/account", label: "Profile" }
     : { href: "/login", label: "Login" };
   const progressRef = useRef<HTMLSpanElement>(null);
+
+  const authIcon = signedIn ? (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0" aria-hidden="true">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
+    </svg>
+  ) : null;
 
   // On the homepage, highlight the tab whose section is in view and fill the
   // scroll progress bar. Elsewhere the active tab simply follows the route.
@@ -184,8 +180,9 @@ export default function PublicNavbar() {
 
           <Link
             href={authLink.href}
-            className="hidden h-10 items-center rounded-lg bg-brand-red px-5 text-xs font-semibold tracking-wide text-white shadow-xs transition-colors hover:bg-brand-red-dark sm:inline-flex"
+            className="hidden h-10 items-center gap-2 rounded-lg bg-brand-red px-5 text-xs font-semibold tracking-wide text-white shadow-xs transition-colors hover:bg-brand-red-dark sm:inline-flex"
           >
+            {authIcon}
             {authLink.label}
           </Link>
 
@@ -254,8 +251,9 @@ export default function PublicNavbar() {
               <Link
                 href={authLink.href}
                 onClick={() => setMenuOpen(false)}
-                className="flex h-11 w-full items-center justify-center rounded-lg bg-brand-red text-sm font-semibold text-white shadow-xs transition-colors hover:bg-brand-red-dark"
+                className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-brand-red text-sm font-semibold text-white shadow-xs transition-colors hover:bg-brand-red-dark"
               >
+                {authIcon}
                 {authLink.label}
               </Link>
             </div>

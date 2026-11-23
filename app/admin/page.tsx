@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { redirect } from "next/navigation";
 import { requireDashboardAccess } from "@/lib/auth/authorization";
+import { BrandMark } from "@/components/brand-logo";
 
 async function AdminRedirect(): Promise<React.ReactNode> {
   await connection();
@@ -19,9 +20,7 @@ function AdminPortalLoading() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
       <div className="flex flex-col items-center gap-3 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-red font-black text-white shadow-sm ring-4 ring-brand-red/10 animate-pulse">
-          <span className="text-xl">G</span>
-        </div>
+        <BrandMark className="h-12 w-12 animate-pulse" />
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
           Accessing Operations Console...
         </p>

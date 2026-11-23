@@ -1,6 +1,9 @@
 
 @import "tailwindcss";
 
+/* dark: utilities follow the site theme toggle (.dark on <html>), not the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ==========================================
    GYMBOX — DESIGN SYSTEM
 ========================================== */

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BrandLogo } from "@/components/brand-logo";
+import { HeroActions, ClosingActions } from "@/components/auth-aware-actions";
+import { LocationMap } from "@/components/location-map";
+import { MembershipRates } from "@/components/membership-rates";
+import { GYM_INFO, MEMBERSHIP_PLANS, formatPeso } from "@/lib/gym-info";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -19,7 +21,7 @@ export default function HomePage() {
       <section
         id="hero"
         aria-labelledby="hero-heading"
-        className="relative flex w-full flex-col items-center px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-36 lg:px-8"
+        className="relative flex w-full flex-col items-center px-4 pb-20 pt-40 sm:px-6 sm:pb-24 sm:pt-52 lg:px-8"
       >
         <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
           {/* GYM BOX banner: plain text in theme tokens, so it adapts to light & dark mode */}
@@ -42,42 +44,31 @@ export default function HomePage() {
           </p>
 
           {/* Call to Action Buttons */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/register">
-              <Button variant="primary" size="lg" className="min-w-40 shadow-card">
-                Join Now
-              </Button>
-            </Link>
-            <a href="#tab-4">
-              <Button variant="outline" size="lg" className="min-w-40">
-                View Rates
-              </Button>
-            </a>
-          </div>
+          <HeroActions />
 
           {/* Friendly Perks Pills */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-text-secondary">
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> ₱60 Daily Walk-ins
+              <span className="text-brand-red">✓</span> Daily from {formatPeso(MEMBERSHIP_PLANS[0].prices.student)}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> ₱750 Student Monthly
+              <span className="text-brand-red">✓</span> Monthly from {formatPeso(MEMBERSHIP_PLANS[1].prices.student)}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> Free Spotting &amp; Form Checks
+              <span className="text-brand-red">✓</span> All-Access
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> No Annual Lock-in
+              <span className="text-brand-red">✓</span> Free Drinking Water
             </span>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 2: WHY GYMBOX (Tab 2 anchor for scroll-highlight)
+          SECTION 2: WHY GYMBOX (section anchor for navbar scroll-highlight)
           ========================================================================= */}
       <section
-        id="tab-2"
+        id="about"
         aria-labelledby="why-heading"
         className="w-full border-t border-border bg-surface/50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
       >
@@ -109,12 +100,12 @@ export default function HomePage() {
                   Affordable Rates
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Honest neighborhood pricing. No registration fees and no annual lock-in
-                  contract. Pay daily, monthly, or promo.
+                  Honest neighborhood pricing with student rates on every plan. Pay daily, monthly,
+                  or save with the 3-month promo.
                 </p>
               </div>
               <div className="mt-6 border-t border-border pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
-                From ₱60 / session
+                From {formatPeso(MEMBERSHIP_PLANS[0].prices.student)} / day
               </div>
             </div>
 
@@ -170,15 +161,15 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <h3 className="mt-5 text-lg font-black uppercase text-text-primary">
-                  Open Every Day
+                  Open 6 Days a Week
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Open 6:00 AM to 10:00 PM on weekdays and until evening on weekends, so it
-                  fits any schedule.
+                  Open Monday to Saturday from 8:00 AM to 9:00 PM. Drop by any time within those
+                  hours. Closed on Sundays.
                 </p>
               </div>
               <div className="mt-6 border-t border-border pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
-                6:00 AM – 10:00 PM
+                Mon – Sat · 8:00 AM – 9:00 PM
               </div>
             </div>
           </div>
@@ -186,10 +177,10 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 3: PROGRAMS & EQUIPMENT (Tab 3 anchor for scroll-highlight)
+          SECTION 3: PROGRAMS & EQUIPMENT (section anchor for navbar scroll-highlight)
           ========================================================================= */}
       <section
-        id="tab-3"
+        id="activities"
         aria-labelledby="programs-heading"
         className="w-full border-t border-border px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
       >
@@ -304,14 +295,14 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 4: MEMBERSHIP RATES (Tab 4 anchor for scroll-highlight)
+          SECTION 4: MEMBERSHIP RATES (section anchor for navbar scroll-highlight)
           ========================================================================= */}
       <section
-        id="tab-4"
+        id="promo"
         aria-labelledby="rates-heading"
         className="w-full border-t border-border bg-surface/50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
               Membership Rates
@@ -320,337 +311,61 @@ export default function HomePage() {
               id="rates-heading"
               className="text-3xl font-black uppercase tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
             >
-              Simple, Honest Rates<span className="text-brand-red">.</span>
+              Simple, Affordable Rates<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              No hidden enrollment fees. Every plan includes full access to weights, cardio,
-              lockers, and showers. Pick the one that fits your budget.
+              Train daily, monthly, or grab the 3-month promo for the best value. Student rates
+              available on every plan.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {/* Rate 1: Walk-in */}
-            <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface-card p-6 shadow-card transition-all hover:border-border-strong sm:p-7">
-              <div>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-text-muted">
-                  No Commitment
-                </span>
-                <h3 className="mt-2 text-xl font-black uppercase text-text-primary">
-                  Walk-In Pass
-                </h3>
-                <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-text-primary">₱60</span>
-                  <span className="text-xs text-text-secondary">/ day</span>
-                </div>
-                <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Perfect for drop-ins, first-timers, or visitors.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Whole day gym access
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free locker use during session
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Cold water refilling station
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free spotting from coaches
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                <Link href="/register" className="block w-full">
-                  <Button variant="secondary" size="md" className="w-full">
-                    Walk In Today
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Rate 2: Student Monthly */}
-            <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface-card p-6 shadow-card transition-all hover:border-border-strong sm:p-7">
-              <div>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-brand-red">
-                  Discounted Rate
-                </span>
-                <h3 className="mt-2 text-xl font-black uppercase text-text-primary">
-                  Student Monthly
-                </h3>
-                <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-text-primary">₱750</span>
-                  <span className="text-xs text-text-secondary">/ month</span>
-                </div>
-                <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  For high school and college students. Just bring a valid school ID.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Unlimited visits 7 days a week
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Full access to weights &amp; cardio
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free locker &amp; shower use
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free basic workout routine
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                <Link href="/register" className="block w-full">
-                  <Button variant="outline" size="md" className="w-full">
-                    Get Student Pass
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Rate 3: Regular Monthly (BEST VALUE) */}
-            <div className="relative flex flex-col justify-between rounded-2xl border-2 border-brand-red bg-surface-card p-6 shadow-elevated transition-all sm:p-7">
-              {/* Best Value Badge */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="rounded-full bg-brand-red px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-white shadow-sm">
-                  Best Value · Most Popular
-                </span>
-              </div>
-
-              <div>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-brand-red">
-                  Standard Access
-                </span>
-                <h3 className="mt-2 text-xl font-black uppercase text-text-primary">
-                  Monthly Member
-                </h3>
-                <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-text-primary">₱950</span>
-                  <span className="text-xs text-text-secondary">/ month</span>
-                </div>
-                <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Our most popular plan. Train every day with no limits.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Unlimited visits all operating hours
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> 1 Free initial fitness assessment
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> 1 free guest pass per month
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free locker &amp; hot/cold showers
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                <Link href="/register" className="block w-full">
-                  <Button variant="primary" size="md" className="w-full shadow-sm">
-                    Join Monthly
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Rate 4: 3-Month Promo */}
-            <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface-card p-6 shadow-card transition-all hover:border-border-strong sm:p-7">
-              <div>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-text-muted">
-                  Save ₱350
-                </span>
-                <h3 className="mt-2 text-xl font-black uppercase text-text-primary">
-                  3-Month Promo
-                </h3>
-                <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-4xl font-black text-text-primary">₱2,500</span>
-                  <span className="text-xs text-text-secondary">/ 3 mos</span>
-                </div>
-                <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  For members committed to long-term results. Only ₱833 per month.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> 90 days continuous unlimited access
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> 2 Free Personal Training intro sessions
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Free Gymbox workout shaker or tee
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> Freeze membership up to 14 days
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                <Link href="/register" className="block w-full">
-                  <Button variant="outline" size="md" className="w-full">
-                    Claim 3-Month Promo
-                  </Button>
-                </Link>
-              </div>
-            </div>
+          <div className="mt-14">
+            <MembershipRates />
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 5: GYM HOURS & LOCATION (Tab 5 anchor for scroll-highlight)
+          SECTION 5: LOCATION (section anchor for navbar scroll-highlight)
           ========================================================================= */}
       <section
-        id="tab-5"
-        aria-labelledby="hours-heading"
+        id="location"
+        aria-labelledby="location-heading"
         className="w-full border-t border-border px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
       >
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
-              Hours &amp; Location
+              Location
             </Badge>
             <h2
-              id="hours-heading"
+              id="location-heading"
               className="text-3xl font-black uppercase tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
             >
-              Right in Your Neighborhood<span className="text-brand-red">.</span>
+              Come Train With Us<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              Easy to reach, close to public transport, and open every day.
+              Find {GYM_INFO.name} on the map and get directions straight to the gym.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {/* Hours Table & Contacts */}
-            <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface-card p-6 shadow-card sm:p-8">
-              <div>
-                <h3 className="text-xl font-black uppercase text-text-primary">
-                  Operating Hours
-                </h3>
-                <p className="mt-1 text-sm text-text-secondary">
-                  Open 7 days a week, including most public holidays.
-                </p>
+          <LocationMap className="mt-12 h-72 sm:h-96" />
 
-                <div className="mt-6 overflow-hidden rounded-xl border border-border">
-                  <table className="w-full text-left text-sm">
-                    <tbody>
-                      <tr className="border-b border-border bg-surface/50">
-                        <td className="px-4 py-3 font-semibold text-text-primary">Monday – Friday</td>
-                        <td className="px-4 py-3 font-mono text-brand-red font-bold">6:00 AM – 10:00 PM</td>
-                      </tr>
-                      <tr className="border-b border-border">
-                        <td className="px-4 py-3 font-semibold text-text-primary">Saturday</td>
-                        <td className="px-4 py-3 font-mono text-text-secondary">7:00 AM – 9:00 PM</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-3 font-semibold text-text-primary">Sunday &amp; Holidays</td>
-                        <td className="px-4 py-3 font-mono text-text-secondary">8:00 AM – 6:00 PM</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="mt-8 border-t border-border pt-6">
-                  <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-text-muted">
-                    Contact &amp; Location Details (Sample Data)
-                  </h4>
-                  <dl className="mt-4 space-y-3 text-sm">
-                    <div className="flex items-start gap-3">
-                      <dt className="w-20 font-semibold text-text-secondary">Address:</dt>
-                      <dd className="text-text-primary font-medium">
-                        Sample St. cor. Mabini Ave., Barangay 123, Quezon City
-                      </dd>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <dt className="w-20 font-semibold text-text-secondary">Phone:</dt>
-                      <dd className="font-mono text-text-primary font-medium">0917 000 0000</dd>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <dt className="w-20 font-semibold text-text-secondary">Landmark:</dt>
-                      <dd className="text-text-primary">Across from the convenience store, beside the community hall</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-
-              <div className="mt-8 flex items-center gap-4 text-xs text-text-muted border-t border-border pt-4 font-mono">
-                <span>Free parking for motorcycles and bikes</span>
-              </div>
-            </div>
-
-            {/* Stylized Modern Location Map Placeholder */}
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8">
-              <div>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-black uppercase text-text-primary">
-                    Neighborhood Map
-                  </h3>
-                  <span className="font-mono text-xs font-bold uppercase text-brand-red">
-                    Quezon City
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-text-secondary">
-                  5-minute walk from major jeepney and tricycle terminals.
-                </p>
-
-                {/* Aesthetic Graphic Map Container */}
-                <div className="relative mt-6 flex h-64 w-full items-center justify-center overflow-hidden rounded-xl border border-border bg-surface-card">
-                  {/* Subtle map road grid */}
-                  <svg
-                    viewBox="0 0 400 240"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-full w-full opacity-60"
-                    aria-hidden="true"
-                  >
-                    {/* Roads */}
-                    <path d="M0 60 H400" stroke="currentColor" strokeWidth="14" className="text-border" />
-                    <path d="M0 160 H400" stroke="currentColor" strokeWidth="20" className="text-border" />
-                    <path d="M120 0 V240" stroke="currentColor" strokeWidth="16" className="text-border" />
-                    <path d="M280 0 V240" stroke="currentColor" strokeWidth="12" className="text-border" />
-                    <path d="M0 160 L400 60" stroke="currentColor" strokeWidth="8" className="text-border/60" />
-
-                    {/* Street Names */}
-                    <text x="14" y="52" fill="currentColor" className="text-text-muted text-[10px] font-mono font-bold">
-                      SAMPLE ST.
-                    </text>
-                    <text x="14" y="152" fill="currentColor" className="text-text-muted text-[10px] font-mono font-bold">
-                      MABINI AVENUE
-                    </text>
-                    <text x="126" y="20" fill="currentColor" className="text-text-muted text-[10px] font-mono font-bold">
-                      KATIPUNAN EXT.
-                    </text>
-                  </svg>
-
-                  {/* Centered Gymbox Pin */}
-                  <div className="absolute z-10 flex flex-col items-center">
-                    <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-brand-red font-black text-white shadow-elevated ring-4 ring-brand-red/20">
-                      G
-                      <span className="absolute -inset-1 animate-ping rounded-full bg-brand-red/30" />
-                    </div>
-                    <span className="mt-1.5 rounded-md bg-surface-card px-2.5 py-1 text-xs font-bold text-text-primary shadow-sm border border-border">
-                      Gymbox QC
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4 text-xs text-text-secondary">
-                <span>📍 Sample St. cor. Mabini Ave.</span>
-                <span className="font-semibold text-brand-red">Walk-ins always welcome</span>
-              </div>
-            </div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={GYM_INFO.location.directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-red px-5 text-sm font-semibold text-white transition-colors hover:bg-brand-red-dark"
+            >
+              Get Directions
+            </a>
+            <Link
+              href="/location"
+              className="inline-flex h-11 items-center justify-center rounded-lg border border-border px-5 text-sm font-semibold text-text-primary transition-colors hover:border-border-strong hover:bg-surface-hover"
+            >
+              Location Details
+            </Link>
           </div>
         </div>
       </section>
@@ -658,75 +373,36 @@ export default function HomePage() {
       {/* =========================================================================
           SECTION 6: FINAL CALL TO ACTION
           ========================================================================= */}
-      <section className="w-full border-t border-border bg-surface/50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-3xl border-2 border-border bg-surface-card p-8 text-center shadow-elevated sm:p-14">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-brand-red" />
+      <section className="w-full border-t border-border px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-surface-card px-6 py-12 text-center sm:px-12 sm:py-14">
+          <span
+            aria-hidden="true"
+            className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red/10 text-brand-red"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01" />
+            </svg>
+          </span>
 
-            <Badge variant="brand" dot className="mb-6">
-              Start Today
-            </Badge>
+          <h2 className="mt-6 text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
+            Everyone starts somewhere
+          </h2>
 
-            <h2 className="text-4xl font-black uppercase tracking-tight text-text-primary sm:text-6xl">
-              Your First Rep Starts Here<span className="text-brand-red">.</span>
-            </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-text-secondary">
+            Whether it&apos;s your first time in a gym or you&apos;re getting back into it,
+            you&apos;ll find friendly faces and a relaxed space to train at your own pace.
+            Come as you are. We&apos;ll be happy to see you.
+          </p>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Don&apos;t wait for the perfect time. Whether you&apos;re just starting out or getting back
-              into training, the Gymbox community will support every rep and every milestone.
-            </p>
+          <ClosingActions />
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Link href="/register">
-                <Button variant="primary" size="lg" className="min-w-48 shadow-card">
-                  Join Gymbox Now
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="outline" size="lg" className="min-w-48">
-                  Staff or Member Login
-                </Button>
-              </Link>
-            </div>
-
-            <p className="mt-6 text-xs text-text-muted">
-              No appointment needed for walk-ins. Just bring your shoes and a change of clothes.
-            </p>
-          </div>
+          <p className="mt-6 text-sm text-text-muted">
+            Open Monday to Saturday, 8:00 AM – 9:00 PM. Just bring your shoes and a change of
+            clothes.
+          </p>
         </div>
       </section>
-
-      {/* =========================================================================
-          PUBLIC FOOTER
-          ========================================================================= */}
-      <footer className="w-full border-t border-border bg-surface px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <BrandLogo size="md" tagline="Community Gym" />
-
-          <div className="flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-wider text-text-secondary">
-            <a href="#hero" className="transition-colors hover:text-text-primary">
-              Home
-            </a>
-            <a href="#tab-2" className="transition-colors hover:text-text-primary">
-              Why Us
-            </a>
-            <a href="#tab-3" className="transition-colors hover:text-text-primary">
-              Programs
-            </a>
-            <a href="#tab-4" className="transition-colors hover:text-text-primary">
-              Rates
-            </a>
-            <a href="#tab-5" className="transition-colors hover:text-text-primary">
-              Location
-            </a>
-          </div>
-
-          <div className="text-center font-mono text-xs text-text-muted sm:text-right">
-            <p>© 2026 Gymbox. Your Neighborhood Gym.</p>
-            <p className="mt-0.5 text-[10px]">Sample Data for Prototype Demo</p>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
