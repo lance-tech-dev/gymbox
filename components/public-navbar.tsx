@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BrandLogo } from "@/components/brand-logo";
+import { createClient } from "@/lib/supabase/client";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -45,6 +46,22 @@ export default function PublicNavbar() {
   const menuId = useId();
   const isHome = pathname === "/";
   const [homeSectionHref, setHomeSectionHref] = useState<string>("/");
+  const [signedIn, setSignedIn] = useState(false);
+
+  // Show "My Account" instead of "Login" for signed-in visitors. Display only:
+  // access to protected pages is always verified on the server.
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(!!session);
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
+
+  const authLink = signedIn
+    ? { href: "/account", label: "My Account" }
+    : { href: "/login", label: "Login" };
   const progressRef = useRef<HTMLSpanElement>(null);
 
   // On the homepage, highlight the tab whose section is in view and fill the
@@ -166,10 +183,10 @@ export default function PublicNavbar() {
           <div aria-hidden="true" className="hidden h-5 w-px bg-border sm:block" />
 
           <Link
-            href="/login"
+            href={authLink.href}
             className="hidden h-10 items-center rounded-lg bg-brand-red px-5 text-xs font-semibold tracking-wide text-white shadow-xs transition-colors hover:bg-brand-red-dark sm:inline-flex"
           >
-            Login
+            {authLink.label}
           </Link>
 
           <button
@@ -235,11 +252,11 @@ export default function PublicNavbar() {
 
             <div className="mt-2 border-t border-border p-2 pt-4">
               <Link
-                href="/login"
+                href={authLink.href}
                 onClick={() => setMenuOpen(false)}
                 className="flex h-11 w-full items-center justify-center rounded-lg bg-brand-red text-sm font-semibold text-white shadow-xs transition-colors hover:bg-brand-red-dark"
               >
-                Login
+                {authLink.label}
               </Link>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
@@ -21,12 +22,14 @@ export const ACCESS_RESTRICTED_PATH = `${LOGIN_PATH}?error=access-restricted`;
 export const ADMIN_HOME_PATH = "/admin/tab-1";
 export const USER_HOME_PATH = "/account";
 export const USER_ACCESS_RESTRICTED_PATH = `${USER_HOME_PATH}?error=access-restricted`;
+// Members land on the public home page after login/sign-up; /account is reachable from the navbar.
+export const MEMBER_LANDING_PATH = "/";
 
 export function getHomePathForRole(role: AppRole | null | undefined): string {
   if (isAdminRole(role)) {
     return ADMIN_HOME_PATH;
   }
-  return USER_HOME_PATH;
+  return MEMBER_LANDING_PATH;
 }
 
 /**
@@ -77,18 +80,34 @@ export function getRedirectTarget(role: AppRole, nextParam?: string | null): str
   return getHomePathForRole(role);
 }
 
-export async function getCurrentUserRole() {
+export type AuthenticatedUser = {
+  id: string;
+  email: string | undefined;
+  user_metadata: Record<string, unknown>;
+};
+
+/**
+ * Resolves the signed-in user and their role once per request (React cache),
+ * so a layout and page that both guard access share a single lookup.
+ */
+export const getCurrentUserRole = cache(async () => {
   const supabase = await createClient();
 
-  // Verify the authenticated user with Supabase.
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
+  // Verify the access token's signature and expiry. This project uses
+  // asymmetric (ES256) signing keys, so verification happens locally against
+  // the cached JWKS instead of a round trip to the Auth server per call.
+  const { data: claimsData, error: claimsError } = await supabase.auth.getClaims();
+  const claims = claimsData?.claims;
 
-  if (userError || !user) {
+  if (claimsError || !claims?.sub) {
     return null;
   }
+
+  const user: AuthenticatedUser = {
+    id: claims.sub,
+    email: typeof claims.email === "string" ? claims.email : undefined,
+    user_metadata: (claims.user_metadata as Record<string, unknown> | undefined) ?? {},
+  };
 
   // Retrieve the user's role from our protected database table.
   const { data: roleRecord, error: roleError } = await supabase
@@ -112,7 +131,7 @@ export async function getCurrentUserRole() {
     user,
     role: role as AppRole,
   };
-}
+});
 
 export async function requireDashboardAccess() {
   const access = await getCurrentUserRole();

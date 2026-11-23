@@ -5,9 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { BrandLogo } from "@/components/brand-logo";
 
 export const metadata: Metadata = {
-  title: "Home | Gymbox - Neighborhood Gym",
+  title: "Home",
   description:
-    "Ang paboritong neighborhood gym sa barangay. Affordable rates, complete weights, friendly coaches, and zero intimidation. Tara, gym na!",
+    "Gymbox is your neighborhood gym. Affordable rates, complete equipment, friendly coaches, and a welcoming community.",
 };
 
 export default function HomePage() {
@@ -21,146 +21,28 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="relative flex w-full flex-col items-center px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-36 lg:px-8"
       >
-        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <Badge variant="brand" dot className="mb-6">
-            Ang Gym ng Barangay · Quezon City
-          </Badge>
-
+        <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+          {/* GYM BOX banner: plain text in theme tokens, so it adapts to light & dark mode */}
           <h1
             id="hero-heading"
-            className="text-4xl font-black uppercase tracking-tight text-text-primary sm:text-6xl md:text-7xl"
+            className="text-[clamp(4.5rem,19vw,12rem)] font-black uppercase leading-[0.85] tracking-[-0.045em] text-text-primary"
           >
-            Tara, Buhat Na<span className="text-brand-red">.</span>
-            <br />
-            <span className="text-text-secondary">Walang Arte, Purong Lakas.</span>
+            Gym <span className="text-brand-red">Box</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
-            Welcome sa Gymbox—ang neighborhood gym na pambayan ang presyo at pang-malakasan
-            ang gamit. Friendly coaches, welcoming community, at walang gym intimidation.
-            Kaya mo &apos;yan!
+          {/* Sub header */}
+          <p className="mt-6 font-mono text-xs font-semibold uppercase tracking-[0.32em] text-text-secondary sm:text-sm">
+            Your Neighborhood Fitness Gym
           </p>
 
-          {/* =====================================================================
-              BIG "GYM BOX" BANNER (Built with SVG & theme tokens for Light/Dark mode)
-              ===================================================================== */}
-          <div className="relative my-8 w-full max-w-3xl select-none sm:my-10">
-            <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-border bg-surface-card/90 p-5 shadow-elevated backdrop-blur-md sm:p-8 lg:p-10">
-              {/* Athletic corner bracket accents */}
-              <span
-                aria-hidden="true"
-                className="absolute left-2.5 top-2.5 h-3.5 w-3.5 border-l-2 border-t-2 border-brand-red"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute right-2.5 top-2.5 h-3.5 w-3.5 border-r-2 border-t-2 border-brand-red"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute bottom-2.5 left-2.5 h-3.5 w-3.5 border-b-2 border-l-2 border-brand-red"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute bottom-2.5 right-2.5 h-3.5 w-3.5 border-b-2 border-r-2 border-brand-red"
-              />
-
-              {/* Athletic Banner Meta */}
-              <div className="mb-3 flex w-full items-center justify-between font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-text-muted">
-                <span className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-red" />
-                  BARANGAY 123 · QC
-                </span>
-                <span>EST. 2024</span>
-              </div>
-
-              {/* Big Responsive SVG Display Banner */}
-              <svg
-                viewBox="0 0 920 180"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-auto w-full select-none"
-                role="img"
-                aria-label="GYM BOX"
-              >
-                {/* Left decorative barbell knurl lines */}
-                <g stroke="currentColor" strokeWidth="2.5" opacity="0.3" className="text-text-muted">
-                  <line x1="24" y1="40" x2="24" y2="140" />
-                  <line x1="34" y1="50" x2="34" y2="130" />
-                  <line x1="44" y1="40" x2="44" y2="140" />
-                  <line x1="54" y1="50" x2="54" y2="130" />
-                  <line x1="64" y1="40" x2="64" y2="140" />
-                </g>
-
-                {/* GYM Typography (tracks text-text-primary in light & dark) */}
-                <text
-                  x="260"
-                  y="136"
-                  textAnchor="middle"
-                  className="fill-text-primary"
-                  style={{
-                    fontFamily: "system-ui, -apple-system, sans-serif",
-                    fontWeight: 900,
-                    fontSize: "132px",
-                    letterSpacing: "-0.04em",
-                  }}
-                >
-                  GYM
-                </text>
-
-                {/* Red BOX Stencil Container */}
-                <rect
-                  x="450"
-                  y="20"
-                  width="400"
-                  height="140"
-                  rx="16"
-                  className="fill-brand-red"
-                />
-
-                {/* White BOX Typography on Red Container */}
-                <text
-                  x="650"
-                  y="136"
-                  textAnchor="middle"
-                  fill="#ffffff"
-                  style={{
-                    fontFamily: "system-ui, -apple-system, sans-serif",
-                    fontWeight: 900,
-                    fontSize: "132px",
-                    letterSpacing: "-0.04em",
-                  }}
-                >
-                  BOX
-                </text>
-
-                {/* Right decorative barbell knurl lines */}
-                <g stroke="currentColor" strokeWidth="2.5" opacity="0.3" className="text-text-muted">
-                  <line x1="866" y1="40" x2="866" y2="140" />
-                  <line x1="876" y1="50" x2="876" y2="130" />
-                  <line x1="886" y1="40" x2="886" y2="140" />
-                  <line x1="896" y1="50" x2="896" y2="130" />
-                </g>
-              </svg>
-
-              {/* Sub-banner details */}
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-border pt-3 text-center">
-                <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  Ang Gym ng Barangay
-                </span>
-                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-brand-red" />
-                <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  Walk-Ins Welcome
-                </span>
-                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-brand-red" />
-                <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-secondary">
-                  ₱60 / Day
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* Tagline */}
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
+            Train hard, pay less, and feel at home. Complete equipment, friendly coaches,
+            and a community that has your back.
+          </p>
 
           {/* Call to Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link href="/register">
               <Button variant="primary" size="lg" className="min-w-40 shadow-card">
                 Join Now
@@ -182,10 +64,10 @@ export default function HomePage() {
               <span className="text-brand-red">✓</span> ₱750 Student Monthly
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> Libreng Spotting &amp; Form Check
+              <span className="text-brand-red">✓</span> Free Spotting &amp; Form Checks
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="text-brand-red">✓</span> Walang Annual Lock-in
+              <span className="text-brand-red">✓</span> No Annual Lock-in
             </span>
           </div>
         </div>
@@ -202,7 +84,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
-              Bakit Dito? · Why Choose Us
+              Why Choose Us
             </Badge>
             <h2
               id="why-heading"
@@ -211,8 +93,8 @@ export default function HomePage() {
               A Real Gym for Real People<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              Hindi kailangan ng mamahaling membership para maging malusog. Dito sa Gymbox,
-              barkada ang turingan at tulungan ang labanan para maabot ang fitness goals mo.
+              You don&apos;t need an expensive membership to get fit. At Gymbox, everyone trains
+              together and helps each other reach their goals.
             </p>
           </div>
 
@@ -224,10 +106,10 @@ export default function HomePage() {
                   ₱
                 </div>
                 <h3 className="mt-5 text-lg font-black uppercase text-text-primary">
-                  Abot-Kayang Presyo
+                  Affordable Rates
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Honest neighborhood pricing. Walang registration fees, walang annual lock-in
+                  Honest neighborhood pricing. No registration fees and no annual lock-in
                   contract. Pay daily, monthly, or promo.
                 </p>
               </div>
@@ -245,11 +127,11 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <h3 className="mt-5 text-lg font-black uppercase text-text-primary">
-                  Kumpletong Gamit
+                  Complete Equipment
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Power racks, Olympic barbells, calibrated iron plates, dumbbells hanggang 100
-                  lbs, cables, at open functional turf.
+                  Power racks, Olympic barbells, calibrated iron plates, dumbbells up to 100
+                  lbs, cables, and open functional turf.
                 </p>
               </div>
               <div className="mt-6 border-t border-border pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
@@ -266,11 +148,11 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <h3 className="mt-5 text-lg font-black uppercase text-text-primary">
-                  Mababait na Coaches
+                  Friendly Coaches
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Approachable coaches na laging handang mag-spot, mag-check ng form, at magbigay
-                  ng gabay nang walang yabang at walang extra charge.
+                  Approachable coaches who are always ready to spot you, check your form, and
+                  guide you at no extra charge.
                 </p>
               </div>
               <div className="mt-6 border-t border-border pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
@@ -288,11 +170,11 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <h3 className="mt-5 text-lg font-black uppercase text-text-primary">
-                  Bukas Araw-Araw
+                  Open Every Day
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                  Bukas mula 6:00 AM hanggang 10:00 PM weekdays, at 7:00 AM hanggang 8:00 PM
-                  weekends. Kayang-kayang isingit sa schedule mo.
+                  Open 6:00 AM to 10:00 PM on weekdays and until evening on weekends, so it
+                  fits any schedule.
                 </p>
               </div>
               <div className="mt-6 border-t border-border pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
@@ -314,7 +196,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
-              Pasilidad &amp; Programa · Facilities
+              Facilities &amp; Programs
             </Badge>
             <h2
               id="programs-heading"
@@ -323,8 +205,8 @@ export default function HomePage() {
               Built for Every Fitness Goal<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              Bago ka man sa buhatan o sanay na sa heavy lifting, kompleto ang pasilidad para
-              sa tuloy-tuloy na progreso mo.
+              Whether you&apos;re new to lifting or already training heavy, we have everything you
+              need to keep progressing.
             </p>
           </div>
 
@@ -342,8 +224,8 @@ export default function HomePage() {
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">
                 Multiple commercial power cages, Olympic barbells, calibrated cast iron plates,
-                flat and incline benches, at dumbbells mula 5 lbs hanggang 100 lbs para sa bench
-                press, squats, at deadlifts.
+                flat and incline benches, and dumbbells from 5 to 100 lbs for bench
+                press, squats, and deadlifts.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-text-secondary">
                 <li className="rounded-md bg-surface px-3 py-1.5 border border-border">Power Racks</li>
@@ -364,8 +246,8 @@ export default function HomePage() {
                 Cardio Machines &amp; Conditioning
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                Commercial treadmills na may incline options, stationary bikes, assault air bikes,
-                at rowing machines. Pampalakas ng baga, pampapawis, at pampataas ng stamina.
+                Commercial treadmills with incline, stationary bikes, air bikes, and rowing
+                machines to build endurance and burn calories.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-text-secondary">
                 <li className="rounded-md bg-surface px-3 py-1.5 border border-border">Treadmills</li>
@@ -386,8 +268,8 @@ export default function HomePage() {
                 Functional Fitness &amp; Turf Lane
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                Synthetic turf track para sa sled pushes, battle ropes, kettlebells, plyometric jump
-                boxes, at medicine balls. Tamang-tama para sa athletic drills at HIIT.
+                A synthetic turf lane for sled pushes, plus battle ropes, kettlebells, jump boxes,
+                and medicine balls. Perfect for athletic drills and HIIT.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-text-secondary">
                 <li className="rounded-md bg-surface px-3 py-1.5 border border-border">Turf Lane</li>
@@ -408,8 +290,8 @@ export default function HomePage() {
                 Boxing Bags &amp; Strike Area
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                Heavy hanging bags, speed bag station, jump ropes, at open mat floor para sa shadow
-                boxing at pad mitt training. Bawas stress, sunog taba, at bilis ng reflexes.
+                Heavy bags, a speed bag station, jump ropes, and open mat space for shadow boxing
+                and mitt work. Great for stress relief, fat burn, and faster reflexes.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-text-secondary">
                 <li className="rounded-md bg-surface px-3 py-1.5 border border-border">Heavy Bags</li>
@@ -432,7 +314,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
-              Presyong Makatarungan · Rates
+              Membership Rates
             </Badge>
             <h2
               id="rates-heading"
@@ -441,8 +323,8 @@ export default function HomePage() {
               Simple, Honest Rates<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              Walang hidden enrollment fee. Lahat ng plan ay may full access sa weights, cardio,
-              lockers, at showers. Pumili ng swak sa bulsa mo.
+              No hidden enrollment fees. Every plan includes full access to weights, cardio,
+              lockers, and showers. Pick the one that fits your budget.
             </p>
           </div>
 
@@ -451,7 +333,7 @@ export default function HomePage() {
             <div className="flex flex-col justify-between rounded-2xl border border-border bg-surface-card p-6 shadow-card transition-all hover:border-border-strong sm:p-7">
               <div>
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-text-muted">
-                  Walang Commitment
+                  No Commitment
                 </span>
                 <h3 className="mt-2 text-xl font-black uppercase text-text-primary">
                   Walk-In Pass
@@ -461,7 +343,7 @@ export default function HomePage() {
                   <span className="text-xs text-text-secondary">/ day</span>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Swak para sa mga drop-ins, sumusubok pa lang, o bumibisita sa barangay.
+                  Perfect for drop-ins, first-timers, or visitors.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
@@ -503,7 +385,7 @@ export default function HomePage() {
                   <span className="text-xs text-text-secondary">/ month</span>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Para sa mga estudyante (High School &amp; College). Kailangan lang ng valid school ID.
+                  For high school and college students. Just bring a valid school ID.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
@@ -552,7 +434,7 @@ export default function HomePage() {
                   <span className="text-xs text-text-secondary">/ month</span>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Ang pinakasikat na plano. Full freedom magbuhat araw-araw nang walang limitasyon.
+                  Our most popular plan. Train every day with no limits.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
@@ -563,7 +445,7 @@ export default function HomePage() {
                     <span className="text-brand-red">✓</span> 1 Free initial fitness assessment
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-brand-red">✓</span> 1 Free Barkada Guest Pass / month
+                    <span className="text-brand-red">✓</span> 1 free guest pass per month
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-brand-red">✓</span> Free locker &amp; hot/cold showers
@@ -594,7 +476,7 @@ export default function HomePage() {
                   <span className="text-xs text-text-secondary">/ 3 mos</span>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-secondary">
-                  Para sa mga seryoso sa long-term transformation. Only ₱833 per month!
+                  For members committed to long-term results. Only ₱833 per month.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 text-xs text-text-secondary border-t border-border pt-5">
@@ -636,16 +518,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="default" size="sm" className="mb-4">
-              Oras at Lokasyon · Visit Us
+              Hours &amp; Location
             </Badge>
             <h2
               id="hours-heading"
               className="text-3xl font-black uppercase tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
             >
-              Right in the Barangay<span className="text-brand-red">.</span>
+              Right in Your Neighborhood<span className="text-brand-red">.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-              Madaling puntahan, malapit sa sakayan, at bukas araw-araw para sa workout mo.
+              Easy to reach, close to public transport, and open every day.
             </p>
           </div>
 
@@ -696,14 +578,14 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-start gap-3">
                       <dt className="w-20 font-semibold text-text-secondary">Landmark:</dt>
-                      <dd className="text-text-primary">Tapat ng 7-Eleven, katabi ng Barangay Outpost</dd>
+                      <dd className="text-text-primary">Across from the convenience store, beside the community hall</dd>
                     </div>
                   </dl>
                 </div>
               </div>
 
               <div className="mt-8 flex items-center gap-4 text-xs text-text-muted border-t border-border pt-4 font-mono">
-                <span>🛵 Libreng parking para sa motor at bike</span>
+                <span>Free parking for motorcycles and bikes</span>
               </div>
             </div>
 
@@ -774,7 +656,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================================================================
-          SECTION 6: FINAL CALL TO ACTION ("Tara, gym na!")
+          SECTION 6: FINAL CALL TO ACTION
           ========================================================================= */}
       <section className="w-full border-t border-border bg-surface/50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <div className="mx-auto max-w-4xl">
@@ -782,16 +664,16 @@ export default function HomePage() {
             <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-brand-red" />
 
             <Badge variant="brand" dot className="mb-6">
-              Kaya Mo &apos;Yan!
+              Start Today
             </Badge>
 
             <h2 className="text-4xl font-black uppercase tracking-tight text-text-primary sm:text-6xl">
-              Tara, Gym Na<span className="text-brand-red">!</span>
+              Your First Rep Starts Here<span className="text-brand-red">.</span>
             </h2>
 
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Huwag nang ipagpaliban ang simula mo. Bago ka man o babalik sa buhatan,
-              ang pamilyang Gymbox ay handang sumuporta sa bawat rep at bawat progress mo.
+              Don&apos;t wait for the perfect time. Whether you&apos;re just starting out or getting back
+              into training, the Gymbox community will support every rep and every milestone.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -808,7 +690,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-6 text-xs text-text-muted">
-              Walang appointment needed para mag-walk in. Dala ka lang ng sapatos at pamalit na damit!
+              No appointment needed for walk-ins. Just bring your shoes and a change of clothes.
             </p>
           </div>
         </div>
@@ -840,7 +722,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center font-mono text-xs text-text-muted sm:text-right">
-            <p>© 2026 Gymbox. Ang Gym ng Barangay.</p>
+            <p>© 2026 Gymbox. Your Neighborhood Gym.</p>
             <p className="mt-0.5 text-[10px]">Sample Data for Prototype Demo</p>
           </div>
         </div>

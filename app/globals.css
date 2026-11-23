@@ -206,21 +206,24 @@ video {
    TYPOGRAPHY
 ========================================== */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
+/* Layered so Tailwind utilities (mt-*, leading-*, tracking-*, font-*) can override these defaults. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
 
-p {
-  margin: 0;
-  line-height: 1.7;
+  p {
+    margin: 0;
+    line-height: 1.7;
+  }
 }
 
 ::selection {
