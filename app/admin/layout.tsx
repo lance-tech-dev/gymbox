@@ -1,0 +1,14 @@
+import type { ReactNode } from "react";
+import { AdminShell } from "@/components/admin-shell";
+
+export default function AdminLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <AdminShell>{children}</AdminShell>
+    </div>
+  );
+}
