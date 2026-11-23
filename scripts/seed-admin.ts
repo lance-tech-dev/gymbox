@@ -51,12 +51,17 @@ async function seedAdmin() {
 
   const userId = data.user.id;
 
+  // The on_auth_user_created trigger already gave this account the default
+  // 'user' role, so promote it instead of inserting a second row.
   const { error: roleError } = await supabase
     .from("user_roles")
-    .insert({
-      user_id: userId,
-      role: "admin",
-    });
+    .upsert(
+      {
+        user_id: userId,
+        role: "admin",
+      },
+      { onConflict: "user_id" },
+    );
 
   if (roleError) {
     const { error: rollbackError } =

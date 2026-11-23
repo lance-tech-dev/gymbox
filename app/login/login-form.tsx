@@ -2,13 +2,14 @@
 
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { login, type LoginState } from "./actions";
 
 const initialState: LoginState = { error: null, email: "" };
 
 const RESTRICTED_MESSAGE =
-  "Access restricted. Your account does not have permission to access the admin area.";
+  "Access restricted. Your account does not have permission to access the staff admin area.";
 
 const inputClassName =
   "block h-11 w-full rounded-lg border border-border bg-surface px-4 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 disabled:opacity-60";
@@ -24,10 +25,13 @@ export function LoginForm() {
   const redirectError =
     searchParams.get("error") === "access-restricted" ? RESTRICTED_MESSAGE : null;
 
+  const next = searchParams.get("next");
   const error = state.error ?? redirectError;
 
   return (
     <form action={formAction} className="relative mt-8 flex flex-col gap-4">
+      {next && <input type="hidden" name="next" value={next} />}
+
       <div>
         <label htmlFor="email" className={labelClassName}>
           Email
@@ -79,6 +83,16 @@ export function LoginForm() {
           Login
         </Button>
       </div>
+
+      <p className="mt-2 text-center text-xs text-text-secondary">
+        No account yet?{" "}
+        <Link
+          href="/register"
+          className="font-semibold text-brand-red transition-colors hover:underline"
+        >
+          Sign up here
+        </Link>
+      </p>
     </form>
   );
 }
