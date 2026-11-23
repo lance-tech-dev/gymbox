@@ -19,10 +19,10 @@ export function PublicUnderDevelopment({
         aria-labelledby="page-heading"
         className="relative flex min-h-[92vh] items-center justify-center px-4 pb-20 pt-32 sm:px-6 lg:px-8"
       >
-        {/* Blueprint grid background */}
+        {/* Gym rubber floor texture background */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-blueprint-grid opacity-35 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+          className="pointer-events-none absolute inset-0 bg-gym-texture opacity-40 mask-[radial-gradient(ellipse_at_center,black_45%,transparent_85%)]"
         />
 
         <div className="relative z-10 mx-auto max-w-2xl text-center">

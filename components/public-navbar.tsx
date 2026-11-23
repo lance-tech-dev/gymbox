@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { BrandLogo } from "@/components/brand-logo";
 
 const NAV_ITEMS = [
-  { label: "Tab 1", href: "/" },
+  { label: "Home", href: "/" },
   { label: "Tab 2", href: "/tab-2" },
   { label: "Tab 3", href: "/tab-3" },
   { label: "Tab 4", href: "/tab-4" },
