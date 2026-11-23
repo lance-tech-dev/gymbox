@@ -374,22 +374,12 @@ export default function HomePage() {
           SECTION 6: FINAL CALL TO ACTION
           ========================================================================= */}
       <section className="w-full border-t border-border px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-surface-card px-6 py-12 text-center sm:px-12 sm:py-14">
-          <span
-            aria-hidden="true"
-            className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-red/10 text-brand-red"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01" />
-            </svg>
-          </span>
-
-          <h2 className="mt-6 text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
+        <div className="mx-auto flex max-w-7xl flex-col items-center rounded-2xl border border-border bg-surface-card px-6 py-12 text-center sm:px-12 sm:py-16">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
             Everyone starts somewhere
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-text-secondary">
+          <p className="mx-auto mt-4 max-w-2xl text-balance text-base leading-relaxed text-text-secondary">
             Whether it&apos;s your first time in a gym or you&apos;re getting back into it,
             you&apos;ll find friendly faces and a relaxed space to train at your own pace.
             Come as you are. We&apos;ll be happy to see you.
@@ -397,7 +387,7 @@ export default function HomePage() {
 
           <ClosingActions />
 
-          <p className="mt-6 text-sm text-text-muted">
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-sm text-text-muted">
             Open Monday to Saturday, 8:00 AM – 9:00 PM. Just bring your shoes and a change of
             clothes.
           </p>

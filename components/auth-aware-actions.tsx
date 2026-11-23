@@ -61,9 +61,6 @@ export function ClosingActions() {
       <Link href="/register" className={`${primary} min-w-48`}>
         Join Gymbox Now
       </Link>
-      <Link href="/login" className={`${outline} min-w-48`}>
-        Staff or Member Login
-      </Link>
     </div>
   );
 }
