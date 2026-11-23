@@ -1,35 +1,40 @@
+import Image from "next/image";
+
 /**
- * Placeholder Gymbox logo: a red "G" mark, divider, and wordmark.
- * Swap the mark for the real Gymbox logo when it's ready.
+ * GymBox logo: the red cube/dumbbell icon, a divider, and the wordmark.
+ * The icon lives at /public/logo-icon.png.
  */
 
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
-    <span
+    <Image
+      src="/logo-icon.png"
+      alt=""
       aria-hidden="true"
-      className={`flex aspect-square items-center justify-center rounded-lg bg-brand-red font-black text-white ${className}`}
-    >
-      G
-    </span>
+      width={512}
+      height={512}
+      priority
+      className={`aspect-square ${className}`}
+    />
   );
 }
 
 const LOGO_SIZES = {
-  md: { mark: "h-9 text-lg", divider: "h-8", name: "text-[17px]", tagline: "mt-1 text-[9px]" },
-  lg: { mark: "h-12 text-2xl", divider: "h-11", name: "text-[23px]", tagline: "mt-1.5 text-[11px]" },
+  md: { mark: "h-9 w-9", divider: "h-8", name: "text-[17px]", tagline: "mt-1 text-[9px]" },
+  lg: { mark: "h-12 w-12", divider: "h-11", name: "text-[23px]", tagline: "mt-1.5 text-[11px]" },
 } as const;
 
 export function BrandLogo({
   className = "",
   size = "md",
-  tagline = "Fitness",
+  tagline = "Fitness Center",
   textClassName = "",
 }: {
   className?: string;
   size?: keyof typeof LOGO_SIZES;
   /** Extra classes for the divider + wordmark (e.g. to fade them out). */
   textClassName?: string;
-  /** Second line under GYMBOX, letter-spaced to the wordmark's width. */
+  /** Second line under GYMBOX, e.g. "Fitness Center". */
   tagline?: string;
 }) {
   const s = LOGO_SIZES[size];
@@ -43,11 +48,8 @@ export function BrandLogo({
           <span className={`${s.name} font-black tracking-[0.06em] text-text-primary transition-colors group-hover:text-brand-red`}>
             GYMBOX
           </span>
-          <span className="sr-only">{tagline}</span>
-          <span aria-hidden="true" className={`${s.tagline} flex justify-between font-bold text-text-secondary`}>
-            {tagline.toUpperCase().split("").map((letter, i) => (
-              <span key={i}>{letter}</span>
-            ))}
+          <span className={`${s.tagline} whitespace-nowrap font-semibold uppercase tracking-[0.14em] text-text-secondary`}>
+            {tagline}
           </span>
         </span>
       </span>

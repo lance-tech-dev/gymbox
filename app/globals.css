@@ -1,6 +1,9 @@
 
 @import "tailwindcss";
 
+/* dark: utilities follow the site theme toggle (.dark on <html>), not the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ==========================================
    GYMBOX — DESIGN SYSTEM
 ========================================== */
@@ -206,21 +209,24 @@ video {
    TYPOGRAPHY
 ========================================== */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
+/* Layered so Tailwind utilities (mt-*, leading-*, tracking-*, font-*) can override these defaults. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
 
-p {
-  margin: 0;
-  line-height: 1.7;
+  p {
+    margin: 0;
+    line-height: 1.7;
+  }
 }
 
 ::selection {
@@ -258,26 +264,28 @@ p {
 }
 
 /* ==========================================
-   ARCHITECTURAL & BLUEPRINT UTILITIES
+   GYM TEXTURE & ATHLETIC THEME UTILITIES
 ========================================== */
 
-.bg-blueprint-grid {
-  background-size: 36px 36px;
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-}
-
-.bg-blueprint-grid-dense {
-  background-size: 18px 18px;
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-}
-
-.bg-drafting-dots {
+/* Subtle rubber gym floor stipple texture with knurled grip dots */
+.bg-gym-texture {
   background-size: 24px 24px;
-  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-position: 0 0, 12px 12px;
+  background-image:
+    radial-gradient(circle, var(--border-strong) 1px, transparent 1.5px),
+    radial-gradient(circle, var(--border) 1px, transparent 1.5px);
+}
+
+/* Subtle athletic diagonal lane stripes */
+.bg-gym-stripes {
+  background-size: 32px 32px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--border) 0,
+    var(--border) 1px,
+    transparent 0,
+    transparent 16px
+  );
 }
 
 .tabular-numbers {

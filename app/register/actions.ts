@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { USER_HOME_PATH } from "@/lib/auth/authorization";
+import { MEMBER_LANDING_PATH } from "@/lib/auth/authorization";
 
 export type RegisterState = {
   error: string | null;
@@ -103,6 +103,6 @@ export async function register(
     };
   }
 
-  // If session is present, user is immediately logged in
-  redirect(USER_HOME_PATH);
+  // Session present: the new member is logged in, so send them to the home page
+  redirect(MEMBER_LANDING_PATH);
 }

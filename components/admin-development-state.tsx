@@ -53,7 +53,7 @@ function GridBackdrop() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 bg-blueprint-grid opacity-35 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+      className="pointer-events-none absolute inset-0 bg-gym-texture opacity-35 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
     />
   );
 }

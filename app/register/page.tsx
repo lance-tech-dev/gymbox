@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Register",
 };
 
-const MODULES = ["Tab 1", "Tab 2", "Tab 3"];
+const MODULES = ["Activities", "Promo", "Location"];
 
 async function AuthRedirectCheck() {
   await connection();
@@ -33,7 +33,7 @@ export default function RegisterPage() {
       {/* Blueprint grid background (matches the public/login pages) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-blueprint-grid opacity-35 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-gym-texture opacity-35 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
       />
 
       {/* Top bar */}
