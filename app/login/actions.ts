@@ -2,7 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { isAdminRole, type AppRole } from "@/lib/auth/authorization";
+import {
+  getRedirectTarget,
+  type AppRole,
+} from "@/lib/auth/authorization";
 
 export type LoginState = {
   error: string | null;
@@ -15,6 +18,7 @@ export async function login(
 ): Promise<LoginState> {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const nextParam = String(formData.get("next") ?? "").trim();
 
   if (!email || !password) {
     return { error: "Please enter your email and password.", email };
@@ -43,18 +47,17 @@ export async function login(
 
   const role = (roleRecord?.role ?? null) as AppRole | null;
 
-  if (!isAdminRole(role)) {
-    // Do not keep a session for accounts without admin authorization.
+  if (!role) {
+    // Account has not been provisioned with an application role.
     await supabase.auth.signOut();
-
     return {
-      error:
-        role === "user"
-          ? "Access restricted. Your account does not have permission to access the admin area."
-          : "Access restricted. Your account has not been assigned an authorized role.",
+      error: "Access restricted. Your account has not been assigned an authorized role.",
       email,
     };
   }
 
-  redirect("/admin/tab-1");
+  // Redirect by role: staff -> /admin/tab-1, members -> /account (respecting safe relative same-site ?next=)
+  const destination = getRedirectTarget(role, nextParam);
+
+  redirect(destination);
 }
