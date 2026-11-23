@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { login, type LoginState } from "./actions";
 
@@ -79,6 +80,16 @@ export function LoginForm() {
           Login
         </Button>
       </div>
+
+      <p className="mt-2 text-center text-xs text-text-secondary">
+        No account yet?{" "}
+        <Link
+          href="/register"
+          className="font-semibold text-brand-red transition-colors hover:underline"
+        >
+          Sign up here
+        </Link>
+      </p>
     </form>
   );
 }

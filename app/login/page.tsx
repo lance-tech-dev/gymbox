@@ -1,9 +1,12 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BrandLogo } from "@/components/brand-logo";
 import { LoginForm } from "./login-form";
+import { getCurrentUserRole, getHomePathForRole } from "@/lib/auth/authorization";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -11,9 +14,22 @@ export const metadata: Metadata = {
 
 const MODULES = ["Tab 1", "Tab 2", "Tab 3"];
 
+async function AuthRedirectCheck() {
+  await connection();
+  const access = await getCurrentUserRole();
+  if (access) {
+    redirect(getHomePathForRole(access.role));
+  }
+  return null;
+}
+
 export default function LoginPage() {
   return (
     <main className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-background text-foreground transition-colors duration-300">
+      <Suspense fallback={null}>
+        <AuthRedirectCheck />
+      </Suspense>
+
       {/* Blueprint grid background (matches the public pages) */}
       <div
         aria-hidden="true"
@@ -100,7 +116,7 @@ export default function LoginPage() {
                 Sign in
               </h1>
               <p className="text-sm text-text-secondary">
-                Use your Gymbox staff account.
+                Use your Gymbox account.
               </p>
             </div>
 

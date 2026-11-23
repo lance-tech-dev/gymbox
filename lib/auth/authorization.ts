@@ -18,6 +18,15 @@ export function isAdminRole(role: AppRole | null | undefined): role is AdminRole
 
 export const LOGIN_PATH = "/login";
 export const ACCESS_RESTRICTED_PATH = `${LOGIN_PATH}?error=access-restricted`;
+export const ADMIN_HOME_PATH = "/admin/tab-1";
+export const USER_HOME_PATH = "/account";
+
+export function getHomePathForRole(role: AppRole | null | undefined): string {
+  if (isAdminRole(role)) {
+    return ADMIN_HOME_PATH;
+  }
+  return USER_HOME_PATH;
+}
 
 export async function getCurrentUserRole() {
   const supabase = await createClient();
@@ -69,4 +78,19 @@ export async function requireDashboardAccess() {
   }
 
   return { user: access.user, role: access.role as AdminRole };
+}
+
+export async function requireUserAccess() {
+  const access = await getCurrentUserRole();
+
+  if (!access) {
+    redirect(LOGIN_PATH);
+  }
+
+  // Admins visiting the user area are sent to the admin dashboard.
+  if (isAdminRole(access.role)) {
+    redirect(ADMIN_HOME_PATH);
+  }
+
+  return { user: access.user, role: access.role };
 }
